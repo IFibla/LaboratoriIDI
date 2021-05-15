@@ -1,0 +1,50 @@
+Enunciat:
+
+    Afegeix al codi de l’exemple un mètode projectTransform () que implementi la crida a
+    perspective amb paràmetres FOV = M_PI/2, ra = 1, znear = 0.4, zfar = 3, i enviı̈ el uniform
+    corresponent de la matriu de projecció al vertex shader, que l’haurà de fer servir. Recorda que
+    tots els paràmetres de la crida perspective han de set floats.
+    És normal el que es veu considerant que la posició de la càmera és el punt (0,0,0) (matriu identitat
+    en view transform)?
+
+Que fem? I com ho fem?
+
+    1. Creem la funcio "virtual void carregaShaders()", on demanarem el uniform: projLoc. Tindrem el seguent codi:
+
+        void MyGLWidget::carregaShaders() {
+            BL2GLWidget::carregaShaders();
+            projLoc = glGetUniformLocation(program->programId(), "proj");
+        }
+
+    2. Creem la funcio "virtual void projectTransform()", en la que tindrem el següent codi:
+
+        void MyGLWidget::projectTransform () {
+            glm::mat4 Proj = glm::perspective(float(M_PI)/2.0f, 1.0f, 0.4f, 3.0f);
+            glUniformMatrix4fv(projLoc, 1, GL_FALSE, &Proj[0][0]);
+        }
+
+        Nota: La funció perspective té els seguents parametres:
+
+        perspective ( FOV(radians), ra, zNear, zFar );
+
+    3. Afegim en el vertex shader el uniform proj. De la següent manera:
+
+        ...
+        uniform mat4 proj;
+
+        ...
+
+        void main()  {
+            ...
+            gl_Position = proj * ... * vec4 (vertex, 1.0);
+        }
+   
+    4. Creem la funcio "virtual void paintGL()" amb el seguent codi al interior:
+
+
+	void MyGLWidget::paintGL() {
+   		 BL2GLWidget::paintGL();
+    		projectTransform();
+	}	
+    
+

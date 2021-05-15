@@ -1,0 +1,26 @@
+Enunciat:
+
+Afegeix a l’escena un terra quadrat de mides 4 en X i en Z, sobre el pla Y=-1 i centrat al punt
+(0,-1,0).
+Assegura’t que el terra no rota, és a dir, hauràs de tenir una transformació de model diferent per
+al terra i per al Homer. Quina transformació li cal al terra?
+
+Que fem? I com ho fem?
+
+	He creat la funcio "virtual void creaBuffersTerra()" en la que s'han declarat els vertex del terra.
+    A més s'ha afegit en el paintGL les seguents instruccions:
+
+        ...
+        glBindVertexArray(VAO_Terra);
+        floorTransform();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindVertexArray(0);
+        ...
+    
+    I per últim, s'ha fet la seguent especificació en la funció "virtual void floorTransform();"
+
+        void MyGLWidget::floorTransform() {
+            glm::mat4 TG(1.0f);
+            TG = glm::translate(TG, glm::vec3(0, -0.5, 0));
+            glUniformMatrix4fv (transLoc, 1, GL_FALSE, &TG[0][0]);
+        }

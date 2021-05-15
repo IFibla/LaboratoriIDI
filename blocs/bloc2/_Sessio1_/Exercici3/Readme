@@ -1,0 +1,50 @@
+Enunciat:
+
+Modifica l’exercici eliminant la caseta i pintant en el seu lloc l’objecte definit pel fitxer
+HomerProves.obj. Carrega l’objecte (load) abans de construir els buffers i construeix dos VBOs
+per a aquest objecte, un a partir de les dades dels seus vèrtexs que ens retorna el mètode
+VBO vertices() de la classe Model i l’altre a partir de la informació del seu material que ens
+retorna el mètode VBO matdiff() i que podem usar com a informació de color per passar-la al
+vertex shader. Analitza i estudia el que s’ha explicat a classe (laboratori) per entendre les crides
+a realitzar, els canvis necesaris al fitxer .pro, etc...
+
+Recorda que per veure correctament qualsevol objecte cal activar l’algorisme d’eliminació de
+parts amagades. Activa el Z-buffer com s’ha explicat a classe.
+
+Que fem? I com ho fem?
+
+	Primer de tot necessitarem associar els nous arxius i on es troben. Per fer això anem al "Bloc2_Exemple.pro", i afegim, al "SOURCES" el "model.cpp". Finalment caldrà afegit al "MyGLWidget.h" l'include de "model.h". Així haurem linkat correctament la nova classe model.
+
+	Seguidament, gràcies al pas anterior, ja podem afegir a "MyGLWidget.h" el model del homer sobre el que treballarem amb la seguent instrucció: Model homer;
+
+	Ara veiem que ens caldran les funcions: "modelTransform" i "creaBuffers". Les creem al .h i al .cpp del nostre arxiu "MyGLWidget". 
+
+	Haurem de crear al "MyGLWidget.h" un GLuint VAO_Homer.
+
+	Ara, dins la funció creaBuffers ("MyGLWidget.cpp"), haurem d'afegir les següents instruccions:
+	- homer.load("PATH_TO_OBJ");
+	- glGenVertexArrays(1, &VAO_HOMER);
+	- glBindVertexArray(VAO_HOMER)
+	- glBindBuffer(GL_ARRAY_BUFFER, VBO_Casa[1]);
+	- glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+
+
+	Seguidament, al "MyGLWidget.h" afegirem un GLuint colorLoc, per tal de pintar el homer de colors.
+	Per tal de linkarla al cpp, dins la funcio "carregaShaders" afegirem el seguent: 
+		colorLoc = glGetUniformLocation(program->programId(), "color");
+
+
+
+	Finalment caldrà actualitzar la funció "paintGL" tal que así:
+
+		projectTransform();
+		viewTransform();
+
+		glClear(GL_COLOR_BUFFER_BIT);
+		modelTransform();
+		glBindVertexArray(VAO_Homer);
+		glDrawArrays(GL_TRIANGLES, 0, homer.faces.size());
+
+		glBindVertexArray(0);
+
+	També haurem de copiar el "modelTransform" de B2GLWidget al nostre cpp.

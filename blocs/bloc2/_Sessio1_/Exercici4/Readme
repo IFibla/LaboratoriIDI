@@ -1,0 +1,34 @@
+Enunciat:
+
+Afegeix una interacció de teclat de manera que amb la tecla R el Homer roti cada vegada 45
+graus (M PI/4 radians) respecte l’eix vertical Y.
+
+Que fem? I com ho fem?
+
+	Creem la funcio "virtual void keyPressEvent(QKeyEvent* event);" en la qual descriurem el seguent condicional:
+
+        switch (event->key()) {
+            case Qt::Key_S: { // escalar a més gran
+            escala += 0.05;
+            break;
+            }
+            case Qt::Key_D: { // escalar a més petit
+            escala -= 0.05;
+            break;
+            }
+            case Qt::Key_R: {
+                angle += M_PI/4;
+                break;
+            }
+            default: event->ignore(); break;
+        }
+
+    A més a més, definirem un tipus de dades float amb el qual mantindrem l'angle de rotació del homer. Per tal de rotar en homer
+    modificarem la funció "void modelTransform()" de la seguent manera: 
+
+        void MyGLWidget::modelTransform () {
+            glm::mat4 transform(1.0f);
+            transform = rotate(transform, angle, glm::vec3(0,1,0));
+            transform = glm::scale(transform, glm::vec3(escala));
+            glUniformMatrix4fv(transLoc, 1, GL_FALSE, &transform[0][0]);
+        }
