@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MyForm</class>
+ <widget class="QWidget" name="MyForm">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>426</width>
+    <height>401</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>1</width>
+    <height>1</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>430</width>
+    <height>389</height>
+   </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::DefaultContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Abacus</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinAndMaxSize</enum>
+     </property>
+     <item>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="MyQLCD" name="display"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="4">
+        <widget class="MyQLabel" name="u0">
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="MyQLabel" name="u1">
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="MyQLabel" name="u2">
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="MyQLabel" name="c0">
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="MyQLabel" name="c1">
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="MyQLabel" name="c2">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel { background-color : green; color : black; }</string>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="bttIncr">
+         <property name="text">
+          <string>&amp;Increment</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="bttReset">
+         <property name="text">
+          <string>&amp;Reset</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyQLCD</class>
+   <extends>QLCDNumber</extends>
+   <header>myqlcd.h</header>
+   <slots>
+    <signal>sendReset()</signal>
+    <signal>sendIncrD()</signal>
+    <signal>sendIncrU()</signal>
+    <slot>valorZero()</slot>
+    <slot>escriuNumero(int)</slot>
+    <slot>reset()</slot>
+    <slot>increment()</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>MyQLabel</class>
+   <extends>QLabel</extends>
+   <header>myqlabel.h</header>
+   <slots>
+    <signal>nextIncr()</signal>
+    <signal>sendReset()</signal>
+    <slot>increment()</slot>
+    <slot>reset()</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>bttIncr</sender>
+   <signal>clicked()</signal>
+   <receiver>display</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>112</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bttReset</sender>
+   <signal>clicked()</signal>
+   <receiver>display</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendIncrU()</signal>
+   <receiver>u0</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u0</sender>
+   <signal>nextIncr()</signal>
+   <receiver>u1</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>u1</sender>
+   <signal>nextIncr()</signal>
+   <receiver>u2</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>77</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendIncrD()</signal>
+   <receiver>c0</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>c0</sender>
+   <signal>nextIncr()</signal>
+   <receiver>c1</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>c1</sender>
+   <signal>nextIncr()</signal>
+   <receiver>c2</receiver>
+   <slot>increment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>77</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>u0</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>u1</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>u2</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>77</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>c0</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>c1</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>display</sender>
+   <signal>sendReset()</signal>
+   <receiver>c2</receiver>
+   <slot>reset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>77</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

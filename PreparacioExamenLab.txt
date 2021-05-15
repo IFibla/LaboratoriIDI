@@ -1,0 +1,6 @@
+Activar el Z-Buffer:
+    A la funcio "initializeGL()", afegim:
+        glEnable( GL_DEPTH_TEST );
+
+    A la funcio "paintGL()", afegim:
+        glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
