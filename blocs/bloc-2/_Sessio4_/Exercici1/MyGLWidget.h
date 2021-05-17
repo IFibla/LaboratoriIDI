@@ -9,8 +9,6 @@ class MyGLWidget : public BL2GLWidget {
     MyGLWidget(QWidget *parent=0) : BL2GLWidget(parent) {}
     ~MyGLWidget();
 
-    float FOV;
-
   protected:
 
     virtual void initializeGL ( );
@@ -43,7 +41,7 @@ class MyGLWidget : public BL2GLWidget {
 
     glm::vec3 angles, VRP;
 
-    float ra, zNear, zFar, radi;
+    float FOV, ra, zNear, zFar, radi;
 
     Model homerProves, patricio;
 
@@ -54,6 +52,10 @@ class MyGLWidget : public BL2GLWidget {
     GLuint width, height;
 
     float x, y;
+
+  public slots:
+    void sendValue (int);
+  signals:
 
   private:
     int printOglError(const char file[], int line, const char func[]);

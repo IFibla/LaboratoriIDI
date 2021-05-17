@@ -331,3 +331,10 @@ void MyGLWidget::mouseMoveEvent (QMouseEvent *event) {
     y = event->y();
     update();
 }
+
+void MyGLWidget::sendValue(int value) {
+    makeCurrent();
+    FOV = (float) value / 10.0;
+    projectTransform(FOV, ra);
+    update();
+}

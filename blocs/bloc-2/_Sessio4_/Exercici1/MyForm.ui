@@ -29,7 +29,16 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QSlider" name="Slider">
+        <widget class="QSlider" name="verticalSlider">
+         <property name="minimum">
+          <number>10</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+         <property name="sliderPosition">
+          <number>10</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -61,8 +70,11 @@
   <customwidget>
    <class>MyGLWidget</class>
    <extends>QWidget</extends>
-   <header>MyGLWidget.h</header>
+   <header location="global">MyGLWidget.h</header>
    <container>1</container>
+   <slots>
+    <slot>sendValue(int)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -80,6 +92,54 @@
     <hint type="destinationlabel">
      <x>839</x>
      <y>529</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>widget</receiver>
+   <slot>sendValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>768</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>365</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Box</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>verticalSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>768</x>
+     <y>671</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Box</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>768</x>
+     <y>331</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>768</x>
+     <y>671</y>
     </hint>
    </hints>
   </connection>
